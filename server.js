@@ -8,6 +8,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Simple health check for the root URL
+app.get("/", (req, res) => {
+  res.send("OK - GEE OpenAI chatbot server is running");
+});
+
+
 const OPENAI_KEY = process.env.OPENAI_API_KEY;
 if (!OPENAI_KEY) {
   console.error("Missing OPENAI_API_KEY in env. Set it in Render environment variables.");
@@ -85,3 +91,4 @@ app.post("/chat", async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server listening on ${PORT}`));
+
